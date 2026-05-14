@@ -475,7 +475,7 @@ table.pt tr:hover td { background:#f8fafe; }
         </div>
         <div id="table-card">
           <span id="perf-title">사업부별 실적 현황<span style="font-size:10.5px;font-weight:600;color:#3a4260;margin-left:6px">'25년 11월 ~ '26년 5월 누적</span></span>
-          <div id="table-wrap"><div id="perf-table"><table class="perf"><thead><tr>
+          <div id="table-wrap"><div id="perf-table">
     <th class="th-info">이름</th>
     <th class="th-deal">계약 목표</th><th class="th-deal">계약 실적</th><th class="th-deal">계약 달성률</th>
     <th class="th-rev">판매 매출 목표</th><th class="th-rev" id="th-rev-act">판매 매출 실적<br><span style="font-size:10px;font-weight:600;opacity:1">('26년 4월 실적)</span></th><th class="th-rev" id="th-rev-pct">판매 매출 달성률<br><span style="font-size:10px;font-weight:600;opacity:1">('26년 4월 실적)</span></th>
@@ -520,15 +520,23 @@ table.pt tr:hover td { background:#f8fafe; }
       </tr></tbody></table></div></div>
         </div>
 
+        <!-- 지사별 실적현황 (전체 현황일 때만 표시) -->
+        <div id="br-table-card" style="background:#fff;border-radius:10px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.05);margin-top:10px;display:none">
+          <span id="br-perf-title" style="font-size:11px;font-weight:700;color:#1a2540">지사별 실적 현황</span>
+          <div style="overflow-x:auto;margin-top:8px">
+            <div id="br-perf-table"></div>
+          </div>
+        </div>
+
         <!-- 영업사원 개인 순위 -->
         <div id="rank-section">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
             <span id="rank-title" style="font-size:11px;font-weight:600;color:#1a2540">영업사원 순위 <span style="font-size:9.5px;font-weight:400;color:#8892a4">전체 직원 기준</span></span>
             <div id="rank-tabs" style="display:flex;gap:4px">
-              <button class="rank-tab active" data-tab="deal" onclick="setRankTab('deal')">계약건수 순위</button>
+              <button class="rank-tab" data-tab="deal" onclick="setRankTab('deal')">계약건수 순위</button>
               <button class="rank-tab" data-tab="rev" onclick="setRankTab('rev')">판매매출 순위</button>
               <button class="rank-tab" data-tab="prof" onclick="setRankTab('prof')">판매이익 순위</button>
-              <button class="rank-tab" data-tab="combined" onclick="setRankTab('combined')">통합 순위</button>
+              <button class="rank-tab active" data-tab="combined" onclick="setRankTab('combined')">통합 순위</button>
             </div>
           </div>
           <div id="rank-table-wrap"><table class="rank-tbl"><thead><tr>
@@ -1347,17 +1355,6 @@ table.pt tr:hover td { background:#f8fafe; }
         </div>
         <!-- KPI 9장 — 메인과 동일 순서 -->
         <div id="rep-kpi"></div>
-        <!-- 개인 전용 인사이트: 전월대비 + 연간페이스 -->
-        <div id="rep-insight-row" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-          <div class="ins-card">
-            <div class="ins-title"><span class="ins-title-dot" style="background:#4f8ef7"></span>전월 대비 증감</div>
-            <div id="rep-mom-content"></div>
-          </div>
-          <div class="ins-card">
-            <div class="ins-title"><span class="ins-title-dot" style="background:#f59e0b"></span>연간 달성 페이스</div>
-            <div id="rep-pace-content"></div>
-          </div>
-        </div>
         <!-- Row 1: 계약건수(wide) + 달성률패널 — 메인과 동일 -->
         <div id="charts-top-rep">
           <div class="chart-card">
@@ -1395,6 +1392,7 @@ table.pt tr:hover td { background:#f8fafe; }
         <div style="display:flex;flex-direction:column;gap:12px">
           <div class="chart-card">
             <div class="chart-title"><span class="chart-dot" style="background:#00b894"></span>계약 건수 — 월별 목표 vs 실적 (누적 막대)</div>
+            <div id="ach-deal-kpi" style="display:flex;gap:10px;margin-bottom:10px"></div>
             <div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;font-size:10px;font-weight:600;color:#3a4260;margin-bottom:8px">
               <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#00b894;margin-right:4px;vertical-align:middle"></span>실적</span>
               <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#d0f5ec;border:1px solid #b2ead8;margin-right:4px;vertical-align:middle"></span>미달 잔량</span>
@@ -1404,6 +1402,7 @@ table.pt tr:hover td { background:#f8fafe; }
           </div>
           <div class="chart-card">
             <div class="chart-title"><span class="chart-dot" style="background:#ff6435"></span>판매 매출 — 월별 목표 vs 실적 (누적 막대)</div>
+            <div id="ach-rev-kpi" style="display:flex;gap:10px;margin-bottom:10px"></div>
             <div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;font-size:10px;font-weight:600;color:#3a4260;margin-bottom:8px">
               <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#ff6435;margin-right:4px;vertical-align:middle"></span>실적</span>
               <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#ffddd3;border:1px solid #ffbdaa;margin-right:4px;vertical-align:middle"></span>미달 잔량</span>
@@ -1413,6 +1412,7 @@ table.pt tr:hover td { background:#f8fafe; }
           </div>
           <div class="chart-card">
             <div class="chart-title"><span class="chart-dot" style="background:#a855f7"></span>판매 이익 — 월별 목표 vs 실적 (누적 막대)</div>
+            <div id="ach-prof-kpi" style="display:flex;gap:10px;margin-bottom:10px"></div>
             <div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;font-size:10px;font-weight:600;color:#3a4260;margin-bottom:8px">
               <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#a855f7;margin-right:4px;vertical-align:middle"></span>실적</span>
               <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#ead5ff;border:1px solid #d4aaff;margin-right:4px;vertical-align:middle"></span>미달 잔량</span>
@@ -1848,6 +1848,45 @@ function renderAchPage() {
     });
   }
 
+  // ── 1년 합계 KPI 요약 ──
+  const totDealAct = data.reduce((s,d)=>s+d.dealAct,0);
+  const totDealTgt = data.reduce((s,d)=>s+d.dealTgt,0);
+  const totRevAct  = data.reduce((s,d)=>s+d.revAct, 0);
+  const totRevTgt  = data.reduce((s,d)=>s+d.revTgt, 0);
+  const totProfAct = data.reduce((s,d)=>s+d.profAct,0);
+  const totProfTgt = data.reduce((s,d)=>s+d.profTgt,0);
+
+  const kpiBox = (label, val, color) => `
+    <div style="flex:1;background:${color}0d;border:1px solid ${color}33;border-radius:6px;padding:4px 8px">
+      <div style="font-size:8.5px;font-weight:600;color:#8892a4;margin-bottom:2px">${label}</div>
+      <div style="font-size:11px;font-weight:700;color:#1a2540">${val}</div>
+    </div>`;
+
+  const achBadge = (act, tgt, color) => {
+    const pct = tgt>0 ? Math.round(act/tgt*100) : 0;
+    const col = pct>=100?'#00b894':pct>=80?'#d97706':'#dc2626';
+    return `
+    <div style="flex:1;background:${col}0d;border:1px solid ${col}33;border-radius:6px;padding:4px 8px">
+      <div style="font-size:8.5px;font-weight:600;color:#8892a4;margin-bottom:2px">달성률</div>
+      <div style="font-size:11px;font-weight:700;color:${col}">${pct}%</div>
+    </div>`;
+  };
+
+  document.getElementById('ach-deal-kpi').innerHTML =
+    kpiBox('1년 실적', Math.round(totDealAct)+'건', '#00b894') +
+    kpiBox('1년 목표', Math.round(totDealTgt)+'건', '#00b894') +
+    achBadge(totDealAct, totDealTgt, '#00b894');
+
+  document.getElementById('ach-rev-kpi').innerHTML =
+    kpiBox('1년 실적', fmt원(totRevAct), '#ff6435') +
+    kpiBox('1년 목표', fmt원(totRevTgt), '#ff6435') +
+    achBadge(totRevAct, totRevTgt, '#ff6435');
+
+  document.getElementById('ach-prof-kpi').innerHTML =
+    kpiBox('1년 실적', fmt원(totProfAct), '#a855f7') +
+    kpiBox('1년 목표', fmt원(totProfTgt), '#a855f7') +
+    achBadge(totProfAct, totProfTgt, '#a855f7');
+
   makeStack('achDealChart', data.map(d=>d.dealAct), data.map(d=>d.dealTgt),
     { act:'#00b894', gap:'#d0f5ec' }, v=>Math.round(v)+'건');
   makeStack('achRevChart',  data.map(d=>d.revAct),  data.map(d=>d.revTgt),
@@ -2013,13 +2052,41 @@ function refreshDash() {
   const revProfLabels = trend.map(t => shiftMonth(t.period));
   const makeBarLine=(id,actual,target,c,yFmt,lbl=labels)=>{
     destroyChart(id);
+    const barLabelPlugin = {
+      id: 'barLabel_'+id,
+      afterDatasetsDraw(chart) {
+        const ctx = chart.ctx;
+        const meta0 = chart.getDatasetMeta(0); // 실적 bar
+        ctx.save();
+        meta0.data.forEach((bar, i) => {
+          const act = actual[i], tgt = target[i];
+          if(act == null || tgt == null) return;
+          const pct = tgt > 0 ? Math.round(act / tgt * 100) : 0;
+          const valStr = '(' + yFmt(act) + '/' + yFmt(tgt) + ')';
+          const topY = bar.y;
+          const col = pct>=100?'#00b894':pct>=80?'#d97706':'#dc2626';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+          ctx.font = 'bold 10px sans-serif';
+          ctx.fillStyle = col;
+          ctx.fillText(pct+'%', bar.x, topY - 14);
+          ctx.font = '9px sans-serif';
+          ctx.fillStyle = '#5a6280';
+          ctx.fillText(valStr, bar.x, topY - 3);
+        });
+        ctx.restore();
+      }
+    };
     charts[id]=new Chart(document.getElementById(id).getContext('2d'),{
       type:'bar',
       data:{labels:lbl,datasets:[
         {label:'실적',data:actual,backgroundColor:c+'99',borderRadius:4,borderSkipped:false,order:2},
         {label:'목표',data:target,type:'line',borderColor:'#94a3b8',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,3],pointRadius:3,pointBackgroundColor:'#fff',pointBorderColor:'#94a3b8',tension:.35,order:1}
       ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      plugins:[barLabelPlugin],
+      options:{responsive:true,maintainAspectRatio:false,
+        layout:{padding:{top:36}},
+        plugins:{legend:{display:false}},
         scales:{
           y:{grid:{color:'rgba(0,0,0,.04)'},border:{display:false},ticks:{font:{size:11,weight:'600'},color:'#3a4260',callback:yFmt}},
           x:{grid:{display:false},border:{display:false},ticks:{font:{size:11,weight:'600'},color:'#3a4260',maxTicksLimit:12}}
@@ -2038,7 +2105,7 @@ function refreshDash() {
 }
 
 /* ── 영업사원 순위 (3탭: 계약건수 / 판매매출 / 통합) ── */
-let activeRankTab = 'deal';
+let activeRankTab = 'combined';
 
 function setRankTab(tab) {
   activeRankTab = tab;
@@ -2477,6 +2544,63 @@ function renderTable(recs, color) {
     }).join('');
   }
   document.getElementById('perf-table').innerHTML=hdr+rows+'</tbody></table>';
+
+  // ── 지사별 실적현황 (전체 현황일 때만 추가 렌더링) ──
+  const brCard = document.getElementById('br-table-card');
+  if(!activeDivId && !activeBrId) {
+    brCard.style.display = 'block';
+    document.getElementById('br-perf-title').innerHTML = '지사별 실적 현황' + cumLabel;
+
+    const brMap = {};
+    recs.forEach(r => {
+      const br = r[3], dv = r[2];
+      if(!br||!dv||!r[4]) return;
+      if(br === '총괄사업팀') return;  // 총괄사업팀 제외
+      const key = `${dv}__${br}`;
+      if(!brMap[key]) brMap[key] = {div:dv,br,dealTgt:0,dealAct:0,revTgt:0,revAct:0,profTgt:0,profAct:0,count:0};
+      const m = brMap[key];
+      m.dealTgt+=r[5];m.dealAct+=r[6];
+      m.revTgt+=r[7];m.revAct+=r[8];
+      m.profTgt+=r[9];m.profAct+=r[10];
+      m.count++;
+    });
+
+    const brHdr = `<table class="perf"><thead><tr>
+      <th class="th-info">사업부</th><th class="th-info">지사</th>
+      <th class="th-deal">계약 목표</th><th class="th-deal">계약 실적</th><th class="th-deal">계약 달성률</th>
+      <th class="th-rev">판매 매출 목표</th><th class="th-rev">판매 매출 실적</th><th class="th-rev">판매 매출 달성률</th>
+      <th class="th-prof">판매 이익 목표</th><th class="th-prof">판매 이익 실적</th><th class="th-prof">판매 이익 달성률</th>
+      <th class="th-info">인원</th>
+    </tr></thead><tbody>`;
+
+    // 사업부 순서 → 지사 순서대로 정렬
+    const brRows = Object.values(brMap)
+      .sort((a,b) => {
+        const di = DIVS.indexOf(a.div) - DIVS.indexOf(b.div);
+        if(di!==0) return di;
+        const ao = Object.keys(ORG[a.div]||{}).indexOf(a.br);
+        const bo = Object.keys(ORG[b.div]||{}).indexOf(b.br);
+        return ao - bo;
+      })
+      .map(a => {
+        const dP = a.dealTgt>0?Math.round(a.dealAct/a.dealTgt*100):0;
+        const rP = a.revTgt>0?Math.round(a.revAct/a.revTgt*100):0;
+        const pP = a.profTgt>0?Math.round(a.profAct/a.profTgt*100):0;
+        const c  = DIV_COLORS[a.div]||'#7c6cf8';
+        return `<tr>
+          <td class="td-name"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${c};margin-right:5px;vertical-align:middle"></span>${a.div}</td>
+          <td class="td-name">${a.br}</td>
+          <td class="td-muted">${Math.round(a.dealTgt)}건</td><td>${Math.round(a.dealAct)}건</td><td>${achCell(dP)}</td>
+          <td class="td-muted">${fmt원(a.revTgt)}</td><td>${fmt원(a.revAct)}</td><td>${achCell(rP)}</td>
+          <td class="td-muted">${fmt원(a.profTgt)}</td><td>${fmt원(a.profAct)}</td><td>${achCell(pP)}</td>
+          <td>${a.count}명</td>
+        </tr>`;
+      }).join('');
+
+    document.getElementById('br-perf-table').innerHTML = brHdr + brRows + '</tbody></table>';
+  } else {
+    brCard.style.display = 'none';
+  }
 }
 
 /* ── Rep Profile ── */
@@ -2559,12 +2683,39 @@ function renderRepProfile(div, br, name) {
   const lbsShifted=trend.map(t=>{const[yr,mo]=t.period.split('-').map(Number);const pm=mo===1?12:mo-1,py=mo===1?yr-1:yr;return`'${String(py).slice(-2)}/${pm}`;});
   const mkBar=(id,actual,target,c,yFmt,lbl=lbs)=>{
     destroyChart(id);
+    const barLabelPlugin2 = {
+      id: 'barLabel_'+id,
+      afterDatasetsDraw(chart) {
+        const ctx = chart.ctx;
+        const meta0 = chart.getDatasetMeta(0);
+        ctx.save();
+        meta0.data.forEach((bar, i) => {
+          const act = actual[i], tgt = target[i];
+          if(act == null || tgt == null) return;
+          const pct = tgt > 0 ? Math.round(act / tgt * 100) : 0;
+          const valStr = '(' + yFmt(act) + '/' + yFmt(tgt) + ')';
+          const col = pct>=100?'#00b894':pct>=80?'#d97706':'#dc2626';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+          ctx.font = 'bold 10px sans-serif';
+          ctx.fillStyle = col;
+          ctx.fillText(pct+'%', bar.x, bar.y - 14);
+          ctx.font = '9px sans-serif';
+          ctx.fillStyle = '#5a6280';
+          ctx.fillText(valStr, bar.x, bar.y - 3);
+        });
+        ctx.restore();
+      }
+    };
     charts[id]=new Chart(document.getElementById(id).getContext('2d'),{
       type:'bar',data:{labels:lbl,datasets:[
         {label:'실적',data:actual,backgroundColor:c+'99',borderRadius:4,borderSkipped:false,order:2},
         {label:'목표',data:target,type:'line',borderColor:'#94a3b8',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,3],pointRadius:3,pointBackgroundColor:'#fff',pointBorderColor:'#94a3b8',tension:.35,order:1}
       ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      plugins:[barLabelPlugin2],
+      options:{responsive:true,maintainAspectRatio:false,
+        layout:{padding:{top:36}},
+        plugins:{legend:{display:false}},
         scales:{y:{grid:{color:'rgba(0,0,0,.04)'},border:{display:false},ticks:{font:{size:11,weight:'600'},color:'#3a4260',callback:yFmt}},
                 x:{grid:{display:false},border:{display:false},ticks:{font:{size:11,weight:'600'},color:'#3a4260',maxTicksLimit:12}}}}
     });
@@ -2576,6 +2727,65 @@ function renderRepProfile(div, br, name) {
   // 개인 전용 인사이트
   renderMoM({div,br,name}, activePeriod, cur, 'rep-mom-content');
   renderPace({div,br,name}, activePeriod, 'rep-pace-content');
+
+  // ── 전사 통합 순위 계산 ──
+  const W_DEAL = 0.2941, W_REV = 0.3529, W_PROF = 0.3529;
+  const cumRecs2 = RAW.filter(r => {
+    const p = `${r[0]}-${String(r[1]).padStart(2,'0')}`;
+    return p <= activePeriod && r[2] && r[3] && r[4];
+  });
+  const repMap2 = {};
+  cumRecs2.forEach(r => {
+    const k = `${r[2]}|${r[3]}|${r[4]}`;
+    if(!repMap2[k]) repMap2[k] = {name:r[4],dealAct:0,dealTgt:0,revAct:0,revTgt:0,profAct:0,profTgt:0};
+    const m = repMap2[k];
+    m.dealTgt+=r[5];m.dealAct+=r[6];m.revTgt+=r[7];m.revAct+=r[8];m.profTgt+=r[9];m.profAct+=r[10];
+  });
+  const allReps2 = Object.values(repMap2).filter(r => !TOTAL_TEAM.has(r.name));
+  const total2 = allReps2.length;
+  const dealRank2 = [...allReps2].sort((a,b)=>b.dealAct-a.dealAct).findIndex(r=>r.name===name)+1;
+  const revRank2  = [...allReps2].sort((a,b)=>b.revAct-a.revAct).findIndex(r=>r.name===name)+1;
+  const profRank2 = [...allReps2].sort((a,b)=>b.profAct-a.profAct).findIndex(r=>r.name===name)+1;
+  const me2 = allReps2.find(r=>r.name===name);
+  const wscore2 = me2 ? (
+    (me2.dealTgt>0?me2.dealAct/me2.dealTgt:0)*W_DEAL +
+    (me2.revTgt>0?me2.revAct/me2.revTgt:0)*W_REV +
+    (me2.profTgt>0?me2.profAct/me2.profTgt:0)*W_PROF
+  ) : 0;
+  const combRank2 = allReps2
+    .map(r=>({name:r.name,score:(r.dealTgt>0?r.dealAct/r.dealTgt:0)*W_DEAL+(r.revTgt>0?r.revAct/r.revTgt:0)*W_REV+(r.profTgt>0?r.profAct/r.profTgt:0)*W_PROF}))
+    .sort((a,b)=>b.score-a.score)
+    .findIndex(r=>r.name===name)+1;
+
+  const rankChip = (rank, color) => {
+    if(rank <= 0) return `<span style="font-size:11px;color:#b0bac9">-</span>`;
+    const isTop = rank <= Math.ceil(total2*0.2);
+    return `<span style="display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:2px 7px;background:${isTop?color+'22':'#f0f2f7'};color:${isTop?color:'#8892a4'};border-radius:20px;font-size:11px;font-weight:700">${rank}위</span>`;
+  };
+
+  document.getElementById('rep-combined-rank').innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px">
+      <div style="text-align:center">
+        <div style="font-size:9px;font-weight:600;color:#8892a4;margin-bottom:4px">계약건수</div>
+        ${rankChip(dealRank2,'#00b894')}
+        <div style="font-size:9px;color:#b0bac9;margin-top:2px">전체 ${total2}명</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:9px;font-weight:600;color:#8892a4;margin-bottom:4px">판매매출</div>
+        ${rankChip(revRank2,'#ff6435')}
+        <div style="font-size:9px;color:#b0bac9;margin-top:2px">전체 ${total2}명</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:9px;font-weight:600;color:#8892a4;margin-bottom:4px">판매이익</div>
+        ${rankChip(profRank2,'#a855f7')}
+        <div style="font-size:9px;color:#b0bac9;margin-top:2px">전체 ${total2}명</div>
+      </div>
+      <div style="text-align:center;border-left:1px solid #f0f2f7">
+        <div style="font-size:9px;font-weight:600;color:#7c6cf8;margin-bottom:4px">통합순위</div>
+        ${rankChip(combRank2,'#7c6cf8')}
+        <div style="font-size:9px;color:#b0bac9;margin-top:2px">전체 ${total2}명</div>
+      </div>
+    </div>`;
   updatePrevMonthLabels(activePeriod);
 }
 
